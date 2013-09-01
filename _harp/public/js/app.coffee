@@ -53,7 +53,7 @@ app.factory 'dictionary', ($q, $http) ->
   dictionary = new Trie()
   dictionary.promise = d.promise
 
-  $http.get('/data.json').success (data) ->
+  $http.get('data.json').success (data) ->
     dictionary.data = data
     d.resolve(dictionary)
 

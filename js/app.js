@@ -42,7 +42,7 @@ app.factory('dictionary', function($q, $http) {
   d = $q.defer();
   dictionary = new Trie();
   dictionary.promise = d.promise;
-  $http.get('/data.json').success(function(data) {
+  $http.get('data.json').success(function(data) {
     dictionary.data = data;
     return d.resolve(dictionary);
   });
