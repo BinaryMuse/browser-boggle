@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <title>Browser Boggle!</title>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/trie.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+  <link type="text/css" rel="stylesheet" href="css/app.css">
+</head>
+<body ng-app="boggle">
+  <div ng-controller="BoggleController">
+
+    <div ng-show="page == 'loading'">
+      loading...
+    </div>
+
+    <div ng-show="page == 'index'">
+      <h1>Greetings, Human! How About a Nice Game of Boggle?</h1>
+      <button ng-click="startGame()">New Game</button>
+    </div>
+
+    <div ng-show="page == 'game'">
+      <h1>SCORE ALL THE POINTS!</h1>
+
+      <table id="board">
+        <tr ng-repeat="row in [0, 1, 2, 3, 4]">
+          <td ng-repeat="col in [0, 1, 2, 3, 4]"
+            ng-click="game.select(row, col)"
+            ng-class="{selected: game.isSelected(row, col)}">
+            {{game.dice[row * 5 + col] | capitalize}}
+          </td>
+        </tr>
+      </table>
+
+      <form>
+        <p>
+          Current Word: <span>{{game.currentWord()}}</span>
+          <input type="submit" ng-click="game.submitWord()"
+            ng-disabled="game.submitting"
+            value="Submit This Word">
+        </p>
+      </form>
+
+      <p>Played Words</p>
+      <table id="history">
+        <tr><th>Word</th><th>Points</th></tr>
+        <tr ng-repeat="play in game.plays">
+          <td>{{play.word}}</td><td>{{play.points}}</td>
+        </tr>
+        <tr class="total_score"><td>TOTAL</td><td>{{game.totalScore()}}</td></tr>
+      </table>
+    </div>
+
+    <div ng-show="page == 'gameOver'">
+      <h1>GAME OVER!!</h1>
+
+      <h2>You got {{game.totalScore()}} points!</h2>
+    </div>
+
+  </div>
+</body>
+</html>

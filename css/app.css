@@ -1,0 +1,7 @@
+body{font-size:20px;}
+table#board td{border:1px solid black;height:100px;width:100px;text-align:center;font-size:32px;font-weight:bold;cursor:pointer;}
+table#board td.selected{background-color:orange;}
+table#history{border:1px solid black;border-collapse:collapse;}
+table#history th,table#history td{border:1px solid black;text-align:left;padding:5px 15px;}
+.total_score{font-weight:bold;}
+#high_score_panel{display:none;}
