@@ -86,12 +86,13 @@ app.factory 'Game', (BOGGLE_DICE, dictionary, fisherYates, $timeout) ->
       word = @currentWord()
       score = @scoreWord(word)
 
+      # Simulate a nice round-trip to the server to check the word.
       @submitting = true
       $timeout (=>
         @plays.push(word: word, points: score)
         @selected = []
         @submitting = false
-      ), 250
+      ), Math.random() * 200 + 50
 
     select: (row, col) =>
       @timer = setTimeout(@gameOver, 30 * 1000) unless @timer?
